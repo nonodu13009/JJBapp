@@ -166,6 +166,9 @@ struct AuthView: View {
                                         .italic()
                                         .font(.system(size: 16, weight: .medium, design: .rounded))
                                 }
+                                .keyboardType(.emailAddress)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
                             
                             Spacer()
                         }
@@ -259,6 +262,32 @@ struct AuthView: View {
                                     )
                             }
                             .buttonStyle(PlainButtonStyle())
+                            
+                            // Bouton de connexion rapide (DEV)
+                            Button(action: {
+                                email = "jeanminono13@gmail.com"
+                                password = "jeanminono13"
+                            }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "bolt.fill")
+                                        .font(.system(size: 14, weight: .bold))
+                                    
+                                    Text("CONNEXION RAPIDE (DEV)")
+                                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                                }
+                                .foregroundColor(.orange)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 40)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color.orange.opacity(0.1))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.orange.opacity(0.5), lineWidth: 1)
+                                        )
+                                )
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                         .padding(.top, 10)
                     }
@@ -270,10 +299,14 @@ struct AuthView: View {
         }
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $showCreateAccount) {
-            CreateAccountView()
+            CreateAccountView(onAccountCreated: {
+                showDashboard = true
+            })
         }
         .fullScreenCover(isPresented: $showDashboard) {
-            DashboardView()
+            DashboardView(onSignOut: {
+                showDashboard = false
+            })
         }
     }
     
@@ -290,15 +323,28 @@ struct AuthView: View {
             return
         }
         
-        // TODO: Implémenter la logique Firebase de connexion
-        // Pour l'instant, on simule une connexion réussie
-        showDashboard = true
+        // Implémenter la logique Firebase de connexion
+        Task {
+            do {
+                try await Auth.auth().signIn(withEmail: email, password: password)
+                DispatchQueue.main.async {
+                    showDashboard = true
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    // TODO: Afficher l'erreur de connexion
+                    print("Erreur de connexion: \(error.localizedDescription)")
+                }
+            }
+        }
     }
 }
 
 // MARK: - Page de création de compte
 struct CreateAccountView: View {
     @Environment(\.dismiss) private var dismiss
+    let onAccountCreated: () -> Void
+    
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
@@ -377,6 +423,7 @@ struct CreateAccountView: View {
                                 }
                                 .keyboardType(.emailAddress)
                                 .autocapitalization(.none)
+                                .disableAutocorrection(true)
                             
                             Spacer()
                         }
@@ -571,12 +618,41 @@ struct CreateAccountView: View {
         // Démarrer la création de compte
         isLoading = true
         
-        // TODO: Implémenter la logique Firebase de création de compte
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            isLoading = false
-            // Simuler une création réussie et basculer vers le dashboard
-            dismiss()
-            // TODO: Naviguer vers le dashboard après création réussie
+        // Implémenter la logique Firebase de création de compte
+        Task {
+            do {
+                let result = try await Auth.auth().createUser(withEmail: email, password: password)
+                print("Compte créé avec succès pour: \(result.user.email ?? "N/A")")
+                
+                DispatchQueue.main.async {
+                    isLoading = false
+                    // Création réussie, fermer la page et naviguer vers le dashboard
+                    dismiss()
+                    onAccountCreated()
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    isLoading = false
+                    // Afficher l'erreur Firebase
+                    // Afficher l'erreur Firebase
+                    let errorMessage: String
+                    if let errorCode = AuthErrorCode(rawValue: (error as NSError).code) {
+                        switch errorCode {
+                        case .emailAlreadyInUse:
+                            errorMessage = "Cet email est déjà utilisé par un autre compte"
+                        case .weakPassword:
+                            errorMessage = "Le mot de passe est trop faible"
+                        case .invalidEmail:
+                            errorMessage = "Format d'email invalide"
+                        default:
+                            errorMessage = "Erreur lors de la création du compte: \(error.localizedDescription)"
+                        }
+                    } else {
+                        errorMessage = "Erreur lors de la création du compte: \(error.localizedDescription)"
+                    }
+                    showError(message: errorMessage)
+                }
+            }
         }
     }
     
@@ -592,106 +668,533 @@ struct CreateAccountView: View {
     }
 }
 
-// MARK: - Dashboard principal
+// MARK: - TabView principale
 struct DashboardView: View {
-    @State private var showLogout = false
+    let onSignOut: () -> Void
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                // Arrière-plan sombre cohérent
-                Color.black
-                    .ignoresSafeArea()
+        TabView {
+            // Onglet Accueil
+            HomeView(onSignOut: onSignOut)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Accueil")
+                }
+            
+            // Onglet JJB
+            JJBView(onSignOut: onSignOut)
+                .tabItem {
+                    Image(systemName: "figure.martial.arts")
+                    Text("JJB")
+                }
+            
+            // Onglet Préparation
+            PreparationView(onSignOut: onSignOut)
+                .tabItem {
+                    Image(systemName: "dumbbell.fill")
+                    Text("Préparation")
+                }
+            
+            // Onglet Techniques
+            TechniquesView(onSignOut: onSignOut)
+                .tabItem {
+                    Image(systemName: "book.fill")
+                    Text("Techniques")
+                }
+            
+            // Onglet Profil
+            ProfileView(onSignOut: onSignOut)
+                .tabItem {
+                    Image(systemName: "person.circle.fill")
+                    Text("Profil")
+                }
+        }
+        .accentColor(Color("GBRed"))
+        .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - Modale de déconnexion personnalisée
+struct LogoutModalView: View {
+    let onConfirm: () -> Void
+    let onCancel: () -> Void
+    
+    var body: some View {
+        // Contenu de la modale sans arrière-plan masquant
+        VStack(spacing: 30) {
+            // Icône de déconnexion
+            Image(systemName: "rectangle.portrait.and.arrow.right")
+                .font(.system(size: 50, weight: .light))
+                .foregroundColor(Color("GBRed"))
+                .padding(.top, 20)
+            
+            // Titre
+            Text("Déconnexion")
+                .font(.system(size: 24, weight: .bold, design: .rounded))
+                .foregroundColor(Color("GBOffWhite"))
+            
+            // Message
+            Text("Êtes-vous sûr de vouloir vous déconnecter ?")
+                .font(.system(size: 16, weight: .medium, design: .rounded))
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+            
+            // Boutons
+            VStack(spacing: 16) {
+                // Bouton Se déconnecter
+                Button(action: onConfirm) {
+                    Text("SE DÉCONNECTER")
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .foregroundColor(Color("GBOffWhite"))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color("GBRed"))
+                        )
+                }
+                .buttonStyle(PlainButtonStyle())
                 
-                VStack(spacing: 40) {
-                    // Header avec icône connectée
-                    HStack {
-                        Spacer()
-                        
-                        Button(action: {
-                            showLogout = true
-                        }) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
-                                    .font(.system(size: 16, weight: .bold))
-                                
-                                Text("Connecté")
-                                    .font(.system(size: 14, weight: .medium, design: .rounded))
-                                    .foregroundColor(.green)
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
+                // Bouton Annuler
+                Button(action: onCancel) {
+                    Text("ANNULER")
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .foregroundColor(Color("GBRed"))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color("GBRed"), lineWidth: 2)
+                                .fill(Color("GBDark"))
+                        )
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
+        }
+        .frame(maxWidth: 320)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color("GBDark"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color("GBGray"), lineWidth: 1)
+                )
+        )
+        .padding(.horizontal, 40)
+    }
+}
+
+// MARK: - Vues des onglets
+struct HomeView: View {
+    @State private var showLogout = false
+    let onSignOut: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color("GBDark")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 30) {
+                // Header avec bouton de déconnexion
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        showLogout = true
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
                             .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.green.opacity(0.1))
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.green.opacity(0.3), lineWidth: 1)
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
                                     )
                             )
-                        }
-                        .buttonStyle(PlainButtonStyle())
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                    
-                    Spacer()
-                    
-                    // Logo Gracie Barra
-                    Image("ban")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 200, height: 120)
-                    
-                    // Titre du dashboard
-                    Text("DASHBOARD")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                    
-                    Text("Bienvenue dans votre espace Jiu-Jitsu")
-                        .font(.system(size: 18, weight: .medium, design: .rounded))
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 40)
-                    
-                    Spacer()
-                    
-                    // Placeholder pour contenu futur
-                    VStack(spacing: 16) {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.gray.opacity(0.2))
-                            .frame(height: 100)
-                            .overlay(
-                                Text("Contenu à venir...")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                            )
-                        
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.gray.opacity(0.2))
-                            .frame(height: 100)
-                            .overlay(
-                                Text("Fonctionnalités en développement")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                            )
-                    }
-                    .padding(.horizontal, 40)
-                    
-                    Spacer()
+                    .buttonStyle(PlainButtonStyle())
                 }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                
+                // Logo Gracie Barra
+                Image("ban")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 120)
+                
+                // Titre
+                Text("ACCUEIL")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(Color("GBOffWhite"))
+                
+                // Sous-titre
+                Text("Dashboard, prochains entraînements, stats rapides, citations motivationnelles")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+                
+                // Placeholder
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color("GBGray"))
+                    .frame(height: 200)
+                    .overlay(
+                        Text("En construction")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(Color("GBOffWhite"))
+                    )
+                    .padding(.horizontal, 40)
+                
+                Spacer()
             }
         }
-        .navigationBarHidden(true)
-        .alert("Déconnexion", isPresented: $showLogout) {
-            Button("Annuler", role: .cancel) { }
-            Button("Se déconnecter", role: .destructive) {
-                // TODO: Implémenter la déconnexion Firebase
-                // Pour l'instant, on simule un retour à l'accueil
+        .sheet(isPresented: $showLogout) {
+            LogoutModalView(
+                onConfirm: {
+                    showLogout = false
+                    onSignOut()
+                },
+                onCancel: {
+                    showLogout = false
+                }
+            )
+        }
+    }
+}
+
+struct JJBView: View {
+    @State private var showLogout = false
+    let onSignOut: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color("GBDark")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 30) {
+                // Header avec bouton de déconnexion
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        showLogout = true
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                
+                // Icône JJB
+                Image(systemName: "figure.martial.arts")
+                    .font(.system(size: 80, weight: .light))
+                    .foregroundColor(Color("GBRed"))
+                
+                // Titre
+                Text("JIU-JITSU")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(Color("GBOffWhite"))
+                
+                // Sous-titre
+                Text("Historique entraînements, partenaires, notes sessions, calendrier cours")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+                
+                // Placeholder
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color("GBGray"))
+                    .frame(height: 200)
+                    .overlay(
+                        Text("En construction")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(Color("GBOffWhite"))
+                    )
+                    .padding(.horizontal, 40)
+                
+                Spacer()
             }
-        } message: {
-            Text("Êtes-vous sûr de vouloir vous déconnecter ?")
+        }
+        .sheet(isPresented: $showLogout) {
+            LogoutModalView(
+                onConfirm: {
+                    showLogout = false
+                    onSignOut()
+                },
+                onCancel: {
+                    showLogout = false
+                }
+            )
+        }
+    }
+}
+
+struct PreparationView: View {
+    @State private var showLogout = false
+    let onSignOut: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color("GBDark")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 30) {
+                // Header avec bouton de déconnexion
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        showLogout = true
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                
+                // Icône Préparation
+                Image(systemName: "dumbbell.fill")
+                    .font(.system(size: 80, weight: .light))
+                    .foregroundColor(Color("GBRed"))
+                
+                // Titre
+                Text("PRÉPARATION")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(Color("GBOffWhite"))
+                
+                // Sous-titre
+                Text("Programmes physiques, exercices conditionnement, cardio JJB, timer")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+                
+                // Placeholder
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color("GBGray"))
+                    .frame(height: 200)
+                    .overlay(
+                        Text("En construction")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(Color("GBOffWhite"))
+                    )
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+            }
+        }
+        .sheet(isPresented: $showLogout) {
+            LogoutModalView(
+                onConfirm: {
+                    showLogout = false
+                    onSignOut()
+                },
+                onCancel: {
+                    showLogout = false
+                }
+            )
+        }
+    }
+}
+
+struct TechniquesView: View {
+    @State private var showLogout = false
+    let onSignOut: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color("GBDark")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 30) {
+                // Header avec bouton de déconnexion
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        showLogout = true
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                
+                // Icône Techniques
+                Image(systemName: "book.fill")
+                    .font(.system(size: 80, weight: .light))
+                    .foregroundColor(Color("GBRed"))
+                
+                // Titre
+                Text("TECHNIQUES")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(Color("GBOffWhite"))
+                
+                // Sous-titre
+                Text("Bibliothèque mouvements, vidéos, notes techniques, progression par garde")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+                
+                // Placeholder
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color("GBGray"))
+                    .frame(height: 200)
+                    .overlay(
+                        Text("En construction")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(Color("GBOffWhite"))
+                    )
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+            }
+        }
+        .sheet(isPresented: $showLogout) {
+            LogoutModalView(
+                onConfirm: {
+                    showLogout = false
+                    onSignOut()
+                },
+                onCancel: {
+                    showLogout = false
+                }
+            )
+        }
+    }
+}
+
+struct ProfileView: View {
+    @State private var showLogout = false
+    let onSignOut: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color("GBDark")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 30) {
+                // Header avec bouton de déconnexion
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        showLogout = true
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
+                
+                // Icône Profil
+                Image(systemName: "person.circle.fill")
+                    .font(.system(size: 80, weight: .light))
+                    .foregroundColor(Color("GBRed"))
+                
+                // Titre
+                Text("PROFIL")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(Color("GBOffWhite"))
+                
+                // Sous-titre
+                Text("Infos personnelles, grade, objectifs, stats globales, paramètres")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+                
+                // Placeholder
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color("GBGray"))
+                    .frame(height: 200)
+                    .overlay(
+                        Text("En construction")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(Color("GBOffWhite"))
+                    )
+                    .padding(.horizontal, 40)
+                
+                Spacer()
+            }
+        }
+        .sheet(isPresented: $showLogout) {
+            LogoutModalView(
+                onConfirm: {
+                    showLogout = false
+                    onSignOut()
+                },
+                onCancel: {
+                    showLogout = false
+                }
+            )
         }
     }
 }
