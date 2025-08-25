@@ -18,24 +18,52 @@ struct JJBappApp: App {
     
     var body: some Scene {
         WindowGroup {
-            // Commence par la page d'accueil sombre
-            WelcomeView()
+            // Créer un seul ThemeManager partagé pour toute l'app
+            ContentView()
+                .environmentObject(ThemeManager())
         }
     }
 }
 
-// MARK: - Page d'accueil sombre Gracie Barra
+// MARK: - Page d'accueil avec thème adaptatif
 struct WelcomeView: View {
+    @EnvironmentObject var themeManager: ThemeManager
     @State private var showLogin = false
     
     var body: some View {
         NavigationView {
             ZStack {
-                // Arrière-plan sombre
-                Color.black
+                // Arrière-plan adaptatif
+                themeManager.backgroundColor
                     .ignoresSafeArea()
                 
                 VStack(spacing: 40) {
+                    // Header avec bouton de thème
+                    HStack {
+                        Spacer()
+                        
+                        // Bouton de basculement de thème
+                        Button(action: {
+                            themeManager.toggleTheme()
+                        }) {
+                            Image(systemName: themeManager.isDarkMode ? "sun.max.fill" : "moon.fill")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(Color("GBRed"))
+                                .padding(12)
+                                .background(
+                                    Circle()
+                                        .fill(Color("GBRed").opacity(0.1))
+                                        .overlay(
+                                            Circle()
+                                                .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                        )
+                                )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    
                     Spacer()
                     
                     // Logo Gracie Barra
@@ -49,12 +77,12 @@ struct WelcomeView: View {
                     VStack(spacing: 16) {
                         Text("JIU-JITSU BRÉSILIEN")
                             .font(.system(size: 32, weight: .bold, design: .rounded))
-                            .foregroundColor(.white)
+                            .foregroundColor(themeManager.textColor)
                             .multilineTextAlignment(.center)
                         
                         Text("Découvrez l'univers du Jiu-Jitsu")
                             .font(.system(size: 18, weight: .medium, design: .rounded))
-                            .foregroundColor(.gray)
+                            .foregroundColor(themeManager.secondaryTextColor)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                     }
@@ -72,7 +100,7 @@ struct WelcomeView: View {
                             .frame(height: 56)
                             .background(
                                 RoundedRectangle(cornerRadius: 28)
-                                    .fill(Color.red)
+                                    .fill(Color("GBRed"))
                             )
                             .padding(.horizontal, 40)
                     }
@@ -82,9 +110,12 @@ struct WelcomeView: View {
                 }
             }
         }
+        .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
+        .environmentObject(themeManager)
         .fullScreenCover(isPresented: $showLogin) {
             // Navigation vers la page de connexion
             AuthView()
+                .environmentObject(themeManager)
         }
     }
 }
@@ -92,18 +123,18 @@ struct WelcomeView: View {
 // MARK: - Page de connexion
 struct AuthView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var authManager = AuthManager()
+    @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject var authManager: AuthManager
     @State private var showPassword = false
     @State private var email = ""
     @State private var password = ""
     @State private var showCreateAccount = false
-    @State private var showDashboard = false
     
     var body: some View {
         NavigationView {
             ZStack {
-                // Arrière-plan sombre cohérent
-                Color.black
+                // Arrière-plan adaptatif
+                themeManager.backgroundColor
                     .ignoresSafeArea()
                 
                 VStack(spacing: 30) {
@@ -114,11 +145,11 @@ struct AuthView: View {
                         }) {
                             Image(systemName: "chevron.left")
                                 .font(.title2)
-                                .foregroundColor(.white)
+                                .foregroundColor(themeManager.textColor)
                                 .padding()
                                 .background(
                                     Circle()
-                                        .fill(Color.gray.opacity(0.3))
+                                        .fill(themeManager.secondaryBackgroundColor.opacity(0.3))
                                 )
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -138,11 +169,11 @@ struct AuthView: View {
                     // Titre de connexion
                     Text("CONNEXION")
                         .font(.system(size: 28, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
+                        .foregroundColor(themeManager.textColor)
                     
                     Text("Accédez à votre espace Jiu-Jitsu")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(.gray)
+                        .foregroundColor(themeManager.secondaryTextColor)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                     
@@ -153,16 +184,16 @@ struct AuthView: View {
                         // Champ Email
                         HStack {
                             Image(systemName: "envelope")
-                                .foregroundColor(.gray)
+                                .foregroundColor(themeManager.secondaryTextColor)
                                 .frame(width: 20)
                             
                             TextField("", text: $email)
                                 .textFieldStyle(PlainTextFieldStyle())
-                                .foregroundColor(.white)
+                                .foregroundColor(themeManager.textColor)
                                 .font(.system(size: 16, weight: .medium, design: .rounded))
                                 .placeholder(when: email.isEmpty) {
                                     Text("Email")
-                                        .foregroundColor(.gray.opacity(0.7))
+                                        .foregroundColor(themeManager.secondaryTextColor.opacity(0.7))
                                         .italic()
                                         .font(.system(size: 16, weight: .medium, design: .rounded))
                                 }
@@ -176,13 +207,13 @@ struct AuthView: View {
                         .frame(height: 50)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.gray.opacity(0.3))
+                                .fill(themeManager.secondaryBackgroundColor.opacity(0.3))
                         )
                         
                         // Champ Mot de passe avec bouton voir/masquer
                         HStack {
                             Image(systemName: "lock")
-                                .foregroundColor(.gray)
+                                .foregroundColor(themeManager.secondaryTextColor)
                                 .frame(width: 20)
                             
                             Group {
@@ -191,7 +222,7 @@ struct AuthView: View {
                                         .textFieldStyle(PlainTextFieldStyle())
                                         .placeholder(when: password.isEmpty) {
                                             Text("Mot de passe")
-                                                .foregroundColor(.gray.opacity(0.7))
+                                                .foregroundColor(themeManager.secondaryTextColor.opacity(0.7))
                                                 .italic()
                                                 .font(.system(size: 16, weight: .medium, design: .rounded))
                                         }
@@ -200,13 +231,13 @@ struct AuthView: View {
                                         .textFieldStyle(PlainTextFieldStyle())
                                         .placeholder(when: password.isEmpty) {
                                             Text("Mot de passe")
-                                                .foregroundColor(.gray.opacity(0.7))
+                                                .foregroundColor(themeManager.secondaryTextColor.opacity(0.7))
                                                 .italic()
                                                 .font(.system(size: 16, weight: .medium, design: .rounded))
                                         }
                                 }
                             }
-                            .foregroundColor(.white)
+                            .foregroundColor(themeManager.textColor)
                             .font(.system(size: 16, weight: .medium, design: .rounded))
                             
                             Spacer()
@@ -300,12 +331,7 @@ struct AuthView: View {
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $showCreateAccount) {
             CreateAccountView(onAccountCreated: {
-                showDashboard = true
-            })
-        }
-        .fullScreenCover(isPresented: $showDashboard) {
-            DashboardView(onSignOut: {
-                showDashboard = false
+                // L'utilisateur sera automatiquement connecté via l'AuthManager
             })
         }
     }
@@ -328,7 +354,8 @@ struct AuthView: View {
             do {
                 try await Auth.auth().signIn(withEmail: email, password: password)
                 DispatchQueue.main.async {
-                    showDashboard = true
+                    authManager.authState = .authenticated
+                    dismiss()
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -343,6 +370,8 @@ struct AuthView: View {
 // MARK: - Page de création de compte
 struct CreateAccountView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject var authManager: AuthManager
     let onAccountCreated: () -> Void
     
     @State private var email = ""
@@ -357,8 +386,8 @@ struct CreateAccountView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Arrière-plan sombre cohérent
-                Color.black
+                // Arrière-plan adaptatif
+                themeManager.backgroundColor
                     .ignoresSafeArea()
                 
                 VStack(spacing: 30) {
@@ -670,6 +699,7 @@ struct CreateAccountView: View {
 
 // MARK: - TabView principale
 struct DashboardView: View {
+    @EnvironmentObject var themeManager: ThemeManager
     let onSignOut: () -> Void
     
     var body: some View {
@@ -710,12 +740,14 @@ struct DashboardView: View {
                 }
         }
         .accentColor(Color("GBRed"))
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
+        .environmentObject(themeManager)
     }
 }
 
 // MARK: - Modale de déconnexion personnalisée
 struct LogoutModalView: View {
+    @EnvironmentObject var themeManager: ThemeManager
     let onConfirm: () -> Void
     let onCancel: () -> Void
     
@@ -731,12 +763,12 @@ struct LogoutModalView: View {
             // Titre
             Text("Déconnexion")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
-                .foregroundColor(Color("GBOffWhite"))
+                .foregroundColor(themeManager.textColor)
             
             // Message
             Text("Êtes-vous sûr de vouloir vous déconnecter ?")
                 .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(.gray)
+                .foregroundColor(themeManager.secondaryTextColor)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
             
@@ -766,7 +798,7 @@ struct LogoutModalView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 25)
                                 .stroke(Color("GBRed"), lineWidth: 2)
-                                .fill(Color("GBDark"))
+                                .fill(themeManager.backgroundColor)
                         )
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -777,10 +809,10 @@ struct LogoutModalView: View {
         .frame(maxWidth: 320)
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color("GBDark"))
+                .fill(themeManager.backgroundColor)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color("GBGray"), lineWidth: 1)
+                        .stroke(themeManager.secondaryBackgroundColor, lineWidth: 1)
                 )
         )
         .padding(.horizontal, 40)
@@ -790,18 +822,39 @@ struct LogoutModalView: View {
 // MARK: - Vues des onglets
 struct HomeView: View {
     @State private var showLogout = false
+    @EnvironmentObject var themeManager: ThemeManager
     let onSignOut: () -> Void
     
     var body: some View {
         ZStack {
-            Color("GBDark")
+            themeManager.backgroundColor
                 .ignoresSafeArea()
             
             VStack(spacing: 30) {
-                // Header avec bouton de déconnexion
+                // Header avec boutons de thème et déconnexion
                 HStack {
+                    // Bouton de basculement de thème
+                    Button(action: {
+                        themeManager.toggleTheme()
+                    }) {
+                        Image(systemName: themeManager.isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
                     
+                    // Bouton de déconnexion
                     Button(action: {
                         showLogout = true
                     }) {
@@ -832,12 +885,12 @@ struct HomeView: View {
                 // Titre
                 Text("ACCUEIL")
                     .font(.system(size: 32, weight: .bold, design: .rounded))
-                    .foregroundColor(Color("GBOffWhite"))
+                    .foregroundColor(themeManager.textColor)
                 
                 // Sous-titre
                 Text("Dashboard, prochains entraînements, stats rapides, citations motivationnelles")
                     .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.gray)
+                    .foregroundColor(themeManager.secondaryTextColor)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                 
@@ -845,12 +898,12 @@ struct HomeView: View {
                 
                 // Placeholder
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color("GBGray"))
+                    .fill(themeManager.secondaryBackgroundColor)
                     .frame(height: 200)
                     .overlay(
                         Text("En construction")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
-                            .foregroundColor(Color("GBOffWhite"))
+                            .foregroundColor(themeManager.textColor)
                     )
                     .padding(.horizontal, 40)
                 
@@ -873,18 +926,39 @@ struct HomeView: View {
 
 struct JJBView: View {
     @State private var showLogout = false
+    @EnvironmentObject var themeManager: ThemeManager
     let onSignOut: () -> Void
     
     var body: some View {
         ZStack {
-            Color("GBDark")
+            themeManager.backgroundColor
                 .ignoresSafeArea()
             
             VStack(spacing: 30) {
-                // Header avec bouton de déconnexion
+                // Header avec boutons de thème et déconnexion
                 HStack {
+                    // Bouton de basculement de thème
+                    Button(action: {
+                        themeManager.toggleTheme()
+                    }) {
+                        Image(systemName: themeManager.isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
                     
+                    // Bouton de déconnexion
                     Button(action: {
                         showLogout = true
                     }) {
@@ -914,12 +988,12 @@ struct JJBView: View {
                 // Titre
                 Text("JIU-JITSU")
                     .font(.system(size: 32, weight: .bold, design: .rounded))
-                    .foregroundColor(Color("GBOffWhite"))
+                    .foregroundColor(themeManager.textColor)
                 
                 // Sous-titre
                 Text("Historique entraînements, partenaires, notes sessions, calendrier cours")
                     .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.gray)
+                    .foregroundColor(themeManager.secondaryTextColor)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                 
@@ -927,12 +1001,12 @@ struct JJBView: View {
                 
                 // Placeholder
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color("GBGray"))
+                    .fill(themeManager.secondaryBackgroundColor)
                     .frame(height: 200)
                     .overlay(
                         Text("En construction")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
-                            .foregroundColor(Color("GBOffWhite"))
+                            .foregroundColor(themeManager.textColor)
                     )
                     .padding(.horizontal, 40)
                 
@@ -955,18 +1029,39 @@ struct JJBView: View {
 
 struct PreparationView: View {
     @State private var showLogout = false
+    @EnvironmentObject var themeManager: ThemeManager
     let onSignOut: () -> Void
     
     var body: some View {
         ZStack {
-            Color("GBDark")
+            themeManager.backgroundColor
                 .ignoresSafeArea()
             
             VStack(spacing: 30) {
-                // Header avec bouton de déconnexion
+                // Header avec boutons de thème et déconnexion
                 HStack {
+                    // Bouton de basculement de thème
+                    Button(action: {
+                        themeManager.toggleTheme()
+                    }) {
+                        Image(systemName: themeManager.isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
                     
+                    // Bouton de déconnexion
                     Button(action: {
                         showLogout = true
                     }) {
@@ -996,12 +1091,12 @@ struct PreparationView: View {
                 // Titre
                 Text("PRÉPARATION")
                     .font(.system(size: 32, weight: .bold, design: .rounded))
-                    .foregroundColor(Color("GBOffWhite"))
+                    .foregroundColor(themeManager.textColor)
                 
                 // Sous-titre
                 Text("Programmes physiques, exercices conditionnement, cardio JJB, timer")
                     .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.gray)
+                    .foregroundColor(themeManager.secondaryTextColor)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                 
@@ -1009,12 +1104,12 @@ struct PreparationView: View {
                 
                 // Placeholder
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color("GBGray"))
+                    .fill(themeManager.secondaryBackgroundColor)
                     .frame(height: 200)
                     .overlay(
                         Text("En construction")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
-                            .foregroundColor(Color("GBOffWhite"))
+                            .foregroundColor(themeManager.textColor)
                     )
                     .padding(.horizontal, 40)
                 
@@ -1037,18 +1132,39 @@ struct PreparationView: View {
 
 struct TechniquesView: View {
     @State private var showLogout = false
+    @EnvironmentObject var themeManager: ThemeManager
     let onSignOut: () -> Void
     
     var body: some View {
         ZStack {
-            Color("GBDark")
+            themeManager.backgroundColor
                 .ignoresSafeArea()
             
             VStack(spacing: 30) {
-                // Header avec bouton de déconnexion
+                // Header avec boutons de thème et déconnexion
                 HStack {
+                    // Bouton de basculement de thème
+                    Button(action: {
+                        themeManager.toggleTheme()
+                    }) {
+                        Image(systemName: themeManager.isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
                     
+                    // Bouton de déconnexion
                     Button(action: {
                         showLogout = true
                     }) {
@@ -1078,12 +1194,12 @@ struct TechniquesView: View {
                 // Titre
                 Text("TECHNIQUES")
                     .font(.system(size: 32, weight: .bold, design: .rounded))
-                    .foregroundColor(Color("GBOffWhite"))
+                    .foregroundColor(themeManager.textColor)
                 
                 // Sous-titre
                 Text("Bibliothèque mouvements, vidéos, notes techniques, progression par garde")
                     .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.gray)
+                    .foregroundColor(themeManager.secondaryTextColor)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                 
@@ -1091,12 +1207,12 @@ struct TechniquesView: View {
                 
                 // Placeholder
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color("GBGray"))
+                    .fill(themeManager.secondaryBackgroundColor)
                     .frame(height: 200)
                     .overlay(
                         Text("En construction")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
-                            .foregroundColor(Color("GBOffWhite"))
+                            .foregroundColor(themeManager.textColor)
                     )
                     .padding(.horizontal, 40)
                 
@@ -1119,18 +1235,39 @@ struct TechniquesView: View {
 
 struct ProfileView: View {
     @State private var showLogout = false
+    @EnvironmentObject var themeManager: ThemeManager
     let onSignOut: () -> Void
     
     var body: some View {
         ZStack {
-            Color("GBDark")
+            themeManager.backgroundColor
                 .ignoresSafeArea()
             
             VStack(spacing: 30) {
-                // Header avec bouton de déconnexion
+                // Header avec boutons de déconnexion et thème
                 HStack {
+                    // Bouton de basculement de thème
+                    Button(action: {
+                        themeManager.toggleTheme()
+                    }) {
+                        Image(systemName: themeManager.isDarkMode ? "sun.max.fill" : "moon.fill")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(Color("GBRed"))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .fill(Color("GBRed").opacity(0.1))
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
                     
+                    // Bouton de déconnexion
                     Button(action: {
                         showLogout = true
                     }) {
@@ -1160,12 +1297,12 @@ struct ProfileView: View {
                 // Titre
                 Text("PROFIL")
                     .font(.system(size: 32, weight: .bold, design: .rounded))
-                    .foregroundColor(Color("GBOffWhite"))
+                    .foregroundColor(themeManager.textColor)
                 
                 // Sous-titre
                 Text("Infos personnelles, grade, objectifs, stats globales, paramètres")
                     .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.gray)
+                    .foregroundColor(themeManager.secondaryTextColor)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                 
@@ -1173,12 +1310,12 @@ struct ProfileView: View {
                 
                 // Placeholder
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(Color("GBGray"))
+                    .fill(themeManager.secondaryBackgroundColor)
                     .frame(height: 200)
                     .overlay(
                         Text("En construction")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
-                            .foregroundColor(Color("GBOffWhite"))
+                            .foregroundColor(themeManager.textColor)
                     )
                     .padding(.horizontal, 40)
                 
@@ -1213,6 +1350,42 @@ extension View {
     }
 }
 
+// MARK: - Gestionnaire de thème
+@MainActor
+class ThemeManager: ObservableObject {
+    @Published var isDarkMode: Bool = true
+    
+    init() {
+        // Charger le thème depuis UserDefaults
+        if let savedTheme = UserDefaults.standard.object(forKey: "isDarkMode") as? Bool {
+            isDarkMode = savedTheme
+        }
+    }
+    
+    func toggleTheme() {
+        isDarkMode.toggle()
+        // Sauvegarder le choix
+        UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
+    }
+    
+    // Couleurs adaptatives
+    var backgroundColor: Color {
+        isDarkMode ? Color("GBDark") : Color("GBLight")
+    }
+    
+    var secondaryBackgroundColor: Color {
+        isDarkMode ? Color("GBGray") : Color("GBLightGray")
+    }
+    
+    var textColor: Color {
+        isDarkMode ? Color("GBOffWhite") : Color("GBDarkText")
+    }
+    
+    var secondaryTextColor: Color {
+        isDarkMode ? .gray : Color("GBDarkText").opacity(0.7)
+    }
+}
+
 // MARK: - Gestionnaire d'authentification (simplifié pour l'instant)
 @MainActor
 class AuthManager: ObservableObject {
@@ -1225,8 +1398,8 @@ class AuthManager: ObservableObject {
 }
 
 // MARK: - États d'authentification
-enum AuthState {
+enum AuthState: Equatable {
     case loading
-    case authenticated(user: User)
+    case authenticated
     case unauthenticated
 }

@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var authManager = AuthManager()
+    @EnvironmentObject var themeManager: ThemeManager
+    
     var body: some View {
-        WelcomeView()
+        Group {
+            if authManager.authState == .authenticated {
+                DashboardView(onSignOut: {
+                    authManager.authState = .unauthenticated
+                })
+                .environmentObject(themeManager)
+            } else {
+                WelcomeView()
+                    .onAppear {
+                        // Réinitialiser l'état d'authentification au démarrage
+                        authManager.authState = .unauthenticated
+                    }
+            }
+        }
+        .environmentObject(authManager)
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(ThemeManager())
 }
