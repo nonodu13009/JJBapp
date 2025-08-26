@@ -980,8 +980,8 @@ struct JJBView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 
-                // Icône JJB
-                Image(systemName: "figure.martial.arts")
+                // Icône JJB - Grappling/Wrestling plus approprié
+                Image(systemName: "figure.wrestling")
                     .font(.system(size: 80, weight: .light))
                     .foregroundColor(Color("GBRed"))
                 
@@ -1233,108 +1233,7 @@ struct TechniquesView: View {
     }
 }
 
-struct ProfileView: View {
-    @State private var showLogout = false
-    @EnvironmentObject var themeManager: ThemeManager
-    let onSignOut: () -> Void
-    
-    var body: some View {
-        ZStack {
-            themeManager.backgroundColor
-                .ignoresSafeArea()
-            
-            VStack(spacing: 30) {
-                // Header avec boutons de déconnexion et thème
-                HStack {
-                    // Bouton de basculement de thème
-                    Button(action: {
-                        themeManager.toggleTheme()
-                    }) {
-                        Image(systemName: themeManager.isDarkMode ? "sun.max.fill" : "moon.fill")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(Color("GBRed"))
-                            .padding(12)
-                            .background(
-                                Circle()
-                                    .fill(Color("GBRed").opacity(0.1))
-                                    .overlay(
-                                        Circle()
-                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
-                                    )
-                            )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    Spacer()
-                    
-                    // Bouton de déconnexion
-                    Button(action: {
-                        showLogout = true
-                    }) {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(Color("GBRed"))
-                            .padding(12)
-                            .background(
-                                Circle()
-                                    .fill(Color("GBRed").opacity(0.1))
-                                    .overlay(
-                                        Circle()
-                                            .stroke(Color("GBRed").opacity(0.3), lineWidth: 1)
-                                    )
-                            )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 20)
-                
-                // Icône Profil
-                Image(systemName: "person.circle.fill")
-                    .font(.system(size: 80, weight: .light))
-                    .foregroundColor(Color("GBRed"))
-                
-                // Titre
-                Text("PROFIL")
-                    .font(.system(size: 32, weight: .bold, design: .rounded))
-                    .foregroundColor(themeManager.textColor)
-                
-                // Sous-titre
-                Text("Infos personnelles, grade, objectifs, stats globales, paramètres")
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(themeManager.secondaryTextColor)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
-                
-                Spacer()
-                
-                // Placeholder
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(themeManager.secondaryBackgroundColor)
-                    .frame(height: 200)
-                    .overlay(
-                        Text("En construction")
-                            .font(.system(size: 24, weight: .bold, design: .rounded))
-                            .foregroundColor(themeManager.textColor)
-                    )
-                    .padding(.horizontal, 40)
-                
-                Spacer()
-            }
-        }
-        .sheet(isPresented: $showLogout) {
-            LogoutModalView(
-                onConfirm: {
-                    showLogout = false
-                    onSignOut()
-                },
-                onCancel: {
-                    showLogout = false
-                }
-            )
-        }
-    }
-}
+// Import de la nouvelle vue ProfileView
 
 // MARK: - Extension pour les placeholders personnalisés
 extension View {

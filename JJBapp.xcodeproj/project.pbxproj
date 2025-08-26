@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B39A68612E5DDB1000F9D806 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B39A68602E5DDB1000F9D806 /* FirebaseFirestore */; };
 		B3EA1F3A2E5C4A98000C3547 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B3EA1F392E5C4A98000C3547 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3EA1F3A2E5C4A98000C3547 /* FirebaseAuth in Frameworks */,
+				B39A68612E5DDB1000F9D806 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			name = JJBapp;
 			packageProductDependencies = (
 				B3EA1F392E5C4A98000C3547 /* FirebaseAuth */,
+				B39A68602E5DDB1000F9D806 /* FirebaseFirestore */,
 			);
 			productName = JJBapp;
 			productReference = B3EA1F282E5C49D0000C3547 /* JJBapp.app */;
@@ -346,10 +349,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B39A68602E5DDB1000F9D806 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3EA1F382E5C4A98000C3547 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		B3EA1F392E5C4A98000C3547 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3EA1F382E5C4A98000C3547 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		B3EA1F3B2E5C4A98000C3548 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3EA1F382E5C4A98000C3547 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
