@@ -359,11 +359,6 @@
 			package = B3EA1F382E5C4A98000C3547 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		B3EA1F3B2E5C4A98000C3548 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B3EA1F382E5C4A98000C3547 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
 /* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B3EA1F202E5C49D0000C3547 /* Project object */;
