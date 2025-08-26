@@ -21,253 +21,333 @@
 
 ## 🟦 **GB1 - FUNDAMENTALS (Semaines 1-16)**
 
-### **Semaine 1 : Garde Fermée Basique**
-- **Techniques** : Scissor sweep, cross choke
+### **Semaine 1 : Garde Fermée (Attacks)**
+- **Techniques** : Self-défense basique + Scissor sweep + Cross choke
 - **Focus** : Contrôle et défense
 - **Drill** : Maintien de la garde fermée
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 2 : Échappement Side Control**
-- **Techniques** : Échappement de base, récupération de la garde
+### **Semaine 2 : Side Control (Escapes)**
+- **Techniques** : Défense étranglement + Échappement par pontage & hip escape
 - **Focus** : Survie et défense
 - **Drill** : Échappements répétitifs
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 3 : Passage de Garde Simple**
-- **Techniques** : Knee slice, toreando
+### **Semaine 3 : Passage de Garde**
+- **Techniques** : Défense saisie + Knee slice / Toreando
 - **Focus** : Contrôle et progression
 - **Drill** : Passages de garde
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 4 : Stabilisation du Mount**
-- **Techniques** : Contrôle du mount, transitions
+### **Semaine 4 : Montée (Mount Control)**
+- **Techniques** : Self-défense contre coup de poing au sol + Stabilisation du mount
 - **Focus** : Position dominante
 - **Drill** : Maintien du mount
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 5 : Back Control Basique**
-- **Techniques** : Étranglement arrière, contrôle du dos
+### **Semaine 5 : Back Control (Attacks)**
+- **Techniques** : Étranglement arrière + Défense étranglement
 - **Focus** : Position de finition
 - **Drill** : Contrôle du dos
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 6 : Garde Ouverte Basique**
-- **Techniques** : Spider guard, tripod sweep
+### **Semaine 6 : Garde Ouverte (Bases)**
+- **Techniques** : Grips + tripod sweep / spider guard basique
 - **Focus** : Garde moderne
 - **Drill** : Transitions de garde
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
 ### **Semaine 7 : Échappement du Mount**
-- **Techniques** : Upa, elbow escape
+- **Techniques** : Trap & roll escape + Elbow escape
 - **Focus** : Défense et survie
 - **Drill** : Échappements
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 8 : Défense Amenée au Sol**
-- **Techniques** : Sprawl, guillotine basique
+### **Semaine 8 : Défense Contre Amenée au Sol**
+- **Techniques** : Sprawl + guillotine basique
 - **Focus** : Self-défense
 - **Drill** : Défense des amenées
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 9 : Half Guard Basique**
-- **Techniques** : Sweeps simples, récupération
+### **Semaine 9 : Half-Guard (Bases)**
+- **Techniques** : Sweeps simples depuis la demi-garde
 - **Focus** : Position de transition
 - **Drill** : Sweeps de half guard
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
 ### **Semaine 10 : Contrôle Nord/Sud**
-- **Techniques** : Contrôle de la position
+- **Techniques** : Stabilisation + transitions
 - **Focus** : Position dominante
 - **Drill** : Maintien nord/sud
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
 ### **Semaine 11 : Attaques Depuis la Garde**
-- **Techniques** : Armbar, triangle
+- **Techniques** : Armbar + triangle basique
 - **Focus** : Soumissions de base
 - **Drill** : Enchaînements d'attaque
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
 ### **Semaine 12 : Passages Variés de Garde**
-- **Techniques** : Différents styles de passage
+- **Techniques** : Toreando / double under
 - **Focus** : Variété technique
 - **Drill** : Passages multiples
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
 ### **Semaine 13 : Takedowns Simples**
-- **Techniques** : Double leg basique, O-soto
+- **Techniques** : O-soto gari / double leg basique
 - **Focus** : Amenées au sol
 - **Drill** : Takedowns répétitifs
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 14 : Défense Étranglements Debout**
-- **Techniques** : Défense des étranglements
+### **Semaine 14 : Défense d'Étranglements Debout**
+- **Techniques** : Défense guillotine + contrôle distance
 - **Focus** : Self-défense
 - **Drill** : Défense en position debout
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
 ### **Semaine 15 : Combinaisons de Balayages**
 - **Techniques** : Scissor → hip bump → kimura
 - **Focus** : Enchaînements
 - **Drill** : Combinaisons fluides
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
-### **Semaine 16 : Révision Complète**
-- **Techniques** : Révision des fondamentaux
+### **Semaine 16 : Synthèse & Révisions**
+- **Techniques** : Révision des positions fondamentales + drills enchaînés
 - **Focus** : Consolidation
 - **Drill** : Sparring technique
+- **Structure** : Self-défense debout + Technique de sol + Drill + Sparring spécifique
 
 ---
 
 ## 🟩 **GB2 - ADVANCED (Semaines 17-32)**
 
 ### **Semaine 17 : Garde Fermée Avancée**
-- **Techniques** : Armbar → triangle → omoplata
+- **Techniques** : Combinaison armbar → triangle → omoplata
 - **Focus** : Enchaînements avancés
 - **Drill** : Transitions fluides
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
 ### **Semaine 18 : Side Control Avancé**
-- **Techniques** : Transitions, kimura
+- **Techniques** : Transitions vers montada / attaque kimura
 - **Focus** : Contrôle avancé
 - **Drill** : Transitions de side control
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
 ### **Semaine 19 : Passages de Garde Avancés**
-- **Techniques** : Passages complexes
+- **Techniques** : Knee cut avec grips, toreando + contre-attaques
 - **Focus** : Efficacité
 - **Drill** : Passages contre résistance
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 20 : Montée Avancée**
-- **Techniques** : S-mount, soumissions combinées
+### **Semaine 20 : Montée (Variantes)**
+- **Techniques** : Montée technique, S-mount, attaques bras/étranglements
 - **Focus** : Position dominante
 - **Drill** : Contrôle du mount
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 21 : Back Control Stratégique**
-- **Techniques** : Maintien + soumissions
+### **Semaine 21 : Back Control**
+- **Techniques** : Maintien contre défense experte, étranglement Gi/No-Gi
 - **Focus** : Stratégie de finition
 - **Drill** : Contrôle du dos
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
 ### **Semaine 22 : Garde Ouverte Moderne**
-- **Techniques** : De la Riva, lasso
+- **Techniques** : De la Riva, spider, lasso guard (bases)
 - **Focus** : Garde moderne
 - **Drill** : Transitions de garde
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 23 : Half Guard Avancée**
-- **Techniques** : Deep half, sweeps
+### **Semaine 23 : Half-Guard Avancée**
+- **Techniques** : Deep half, attaques kimura sweep
 - **Focus** : Position de transition
 - **Drill** : Sweeps avancés
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 24 : Takedowns Avancés**
-- **Techniques** : Double leg, O-soto gari
+### **Semaine 24 : Takedowns**
+- **Techniques** : Double leg variations, O-soto gari, défense de tirage de garde
 - **Focus** : Amenées au sol
 - **Drill** : Takedowns enchaînés
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
 ### **Semaine 25 : X-Guard**
-- **Techniques** : Entrées et sweeps
+- **Techniques** : Entrées et sweeps depuis X-guard
 - **Focus** : Garde moderne
 - **Drill** : Transitions X-guard
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 26 : North-South Avancé**
-- **Techniques** : Contrôle + soumissions
+### **Semaine 26 : North-South**
+- **Techniques** : Contrôles + soumissions (kimura, north-south choke)
 - **Focus** : Position dominante
 - **Drill** : Contrôle nord/sud
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
 ### **Semaine 27 : Attaques Garde Ouverte**
-- **Techniques** : Berimbolo, lapel guard
+- **Techniques** : Berimbolo basique, lapel guard intro
 - **Focus** : Attaques modernes
 - **Drill** : Enchaînements d'attaque
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 28 : Passages Anti-Guards Modernes**
-- **Techniques** : Contre spider, lasso, DLR
+### **Semaine 28 : Passages Contre Modernes**
+- **Techniques** : Contre spider, contre lasso, contre De la Riva
 - **Focus** : Défense contre gardes modernes
 - **Drill** : Passages défensifs
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 29 : Takedowns Enchaînés**
-- **Techniques** : Enchaînements lutte/judo
+### **Semaine 29 : Takedowns Avancés**
+- **Techniques** : Combinaisons judo/lutte + transitions rapides
 - **Focus** : Combinaisons
 - **Drill** : Takedowns multiples
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 30 : Leg Locks Autorisés**
-- **Techniques** : Straight ankle, kneebar
+### **Semaine 30 : Leg Locks Autorisés (selon ceinture)**
+- **Techniques** : Straight ankle lock, kneebar (pas de heel hook en Gi)
 - **Focus** : Soumissions de jambes
 - **Drill** : Leg locks
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
 ### **Semaine 31 : Enchaînements Positionnels**
-- **Techniques** : Flow complet
+- **Techniques** : Flow : garde → sweep → passe → montée
 - **Focus** : Fluidité
 - **Drill** : Enchaînements
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
-### **Semaine 32 : Synthèse & Sparring Intensif**
-- **Techniques** : Révision avancée
+### **Semaine 32 : Synthèse & Révisions**
+- **Techniques** : Révision complète + sparring intensif
 - **Focus** : Application
 - **Drill** : Sparring avancé
+- **Public** : Ceintures bleues et plus
+- **Ajouts** : Takedowns, drills avancés, plus de sparring libre
 
 ---
 
 ## 🔴 **GB3 - BLACK BELT PROGRAM (Semaines 33-48)**
 
-### **Semaine 33 : Garde Moderne**
-- **Techniques** : Lapel guard, worm guard
+### **Semaine 33 : Garde Moderne (lapel / worm)**
+- **Techniques** : Entrées, contrôles et sweeps avec le lapel
 - **Focus** : Garde de compétition
 - **Drill** : Contrôle de la garde
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
 ### **Semaine 34 : Passing Avancé**
-- **Techniques** : Leg drag, body lock
+- **Techniques** : Leg drag, contre worm/lasso, body lock
 - **Focus** : Passages efficaces
 - **Drill** : Passages de compétition
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 35 : X-Guard / Single Leg X**
-- **Techniques** : Sweeps, entrées
+### **Semaine 35 : X-Guard & Single Leg X**
+- **Techniques** : Entrées et transitions vers sweeps/leg locks
 - **Focus** : Garde moderne
 - **Drill** : Transitions X-guard
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
 ### **Semaine 36 : Montée Avancée**
-- **Techniques** : Armbar, triangle, mounted guillotine
+- **Techniques** : S-mount, attaques combinées (armbar, triangle, mounted guillotine)
 - **Focus** : Finitions depuis le mount
 - **Drill** : Soumissions montées
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 37 : Back Control Compétition**
-- **Techniques** : Berimbolo → dos
+### **Semaine 37 : Back Control Stratégique**
+- **Techniques** : Transitions berimbolo → dos, variations Gi/No-Gi
 - **Focus** : Prise du dos
 - **Drill** : Berimbolo
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 38 : Leg Locks IBJJF**
-- **Techniques** : Ankle lock, kneebar, toe hold
+### **Semaine 38 : Leg Locks (IBJJF autorisés)**
+- **Techniques** : Straight ankle, toe hold, kneebar
 - **Focus** : Soumissions de jambes
 - **Drill** : Leg locks
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
 ### **Semaine 39 : Takedowns Compétition**
-- **Techniques** : Judo + lutte
+- **Techniques** : Variations judo + lutte (chain wrestling)
 - **Focus** : Amenées au sol
 - **Drill** : Takedowns de compétition
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 40 : Enchaînements Flow Drills**
-- **Techniques** : Guard → pass → mount
+### **Semaine 40 : Transitions Flow**
+- **Techniques** : Passages → montada → soumission, drills longs
 - **Focus** : Fluidité technique
 - **Drill** : Enchaînements
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
 ### **Semaine 41 : 50/50 Guard**
-- **Techniques** : Sweeps, back takes
+- **Techniques** : Sweeps, back takes, contre-soumissions
 - **Focus** : Garde moderne
 - **Drill** : Transitions 50/50
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 42 : North-South Avancé**
-- **Techniques** : Kimura trap, choke
+### **Semaine 42 : Position North-South**
+- **Techniques** : Kimura trap, north-south choke, transitions
 - **Focus** : Soumissions avancées
 - **Drill** : Contrôle nord/sud
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 43 : Garde Inversée**
-- **Techniques** : Inverted guard, omoplata
+### **Semaine 43 : Garde Inversée (inverted guard)**
+- **Techniques** : Attaques triangles inversés, omoplatas
 - **Focus** : Garde moderne
 - **Drill** : Transitions inversées
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
 ### **Semaine 44 : Counter-Attacks**
-- **Techniques** : Défense → attaque
+- **Techniques** : Défense → attaque, contre-sweeps
 - **Focus** : Contre-attaque
 - **Drill** : Enchaînements défensifs
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 45 : Systèmes Compétition**
-- **Techniques** : Gestion du score IBJJF
+### **Semaine 45 : Systèmes de Compétition**
+- **Techniques** : Gestion du score, stratégie d'avantages
 - **Focus** : Stratégie de compétition
 - **Drill** : Simulation compétition
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 46 : No-Gi Avancé**
-- **Techniques** : Passing body lock, leg entries
+### **Semaine 46 : Enchaînements No-Gi**
+- **Techniques** : Passing body lock, leg entries, front headlock
 - **Focus** : No-gi moderne
 - **Drill** : Transitions no-gi
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 47 : Simulation Compétition**
-- **Techniques** : Sparring IBJJF
+### **Semaine 47 : Simulation de Compétition**
+- **Techniques** : Sparring IBJJF, règles de points strictes
 - **Focus** : Application compétition
 - **Drill** : Sparring spécifique
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
-### **Semaine 48 : Révision Complète + Affûtage Compétition**
-- **Techniques** : Révision complète
+### **Semaine 48 : Synthèse & Révisions**
+- **Techniques** : Révision globale + affûtage compétition
 - **Focus** : Perfectionnement
 - **Drill** : Sparring final
+- **Public** : Ceintures marron & noires
+- **Objectif** : Perfectionner la stratégie, les enchaînements complexes et la compétition de haut niveau
 
 ---
 
@@ -329,14 +409,31 @@
 ## 🎯 **Structure des Cours Gracie Barra**
 
 ### **📋 Format Standard (Tous Niveaux)**
-1. **Self-défense / Takedown** (15-20 min)
-2. **Technique principale** (30-40 min)
+1. **Self-défense (debout)** (15-20 min)
+2. **Technique de sol (position ou attaque)** (30-40 min)
 3. **Drill / Enchaînement** (15-20 min)
-4. **Sparring spécifique ou libre** (15-20 min)
+4. **Sparring spécifique (positional sparring)** (15-20 min)
 
 ### **⏱️ Durée Totale**
 - **Cours complet** : 90-120 minutes
 - **Sparring optionnel** : +30 minutes
+
+### **🔄 Structure Spécifique par Programme**
+
+#### **GB1 - Fundamentals**
+- **Focus** : Bases + self-défense
+- **Sparring** : Positionnel spécifique
+- **Public** : Tous niveaux, débutants
+
+#### **GB2 - Advanced**
+- **Focus** : Approfondissement + garde moderne + sparring
+- **Sparring** : Plus de sparring libre
+- **Public** : Ceintures bleues et plus
+
+#### **GB3 - Black Belt Program**
+- **Focus** : Stratégie + compétition + systèmes avancés
+- **Sparring** : Compétition-style (score, chrono, reset)
+- **Public** : Ceintures marron & noires
 
 ---
 
@@ -352,6 +449,27 @@
 - **Progression** : Amélioration continue
 - **Flexibilité** : Adaptation au niveau
 - **Standardisation** : Qualité uniforme
+
+---
+
+## 🔑 **Différences Clés entre Programmes**
+
+### **GB1 vs GB2**
+- **GB1** = Bases, self-defense, positions fondamentales
+- **GB2** = Approfondissement, variations, guards modernes, plus de lutte/judo, introduction de soumissions de jambes autorisées selon grade
+- **GB2** prépare à GB3 (Black Belt Program), qui est orienté compétition et spécialisation
+
+### **GB2 vs GB3**
+- **GB2** → Techniques avancées, introduction aux guards modernes, sparring structuré
+- **GB3** → Stratégie, système complet, optimisation pour la compétition et la ceinture noire
+- **GB3** est un programme d'élite, pensé pour ceux qui veulent pousser au maximum leur pratique (compétiteurs, futurs professeurs, black belts)
+
+### **Caractéristiques Spécifiques GB3**
+- Travail avancé de garde moderne (lapel guard, worm guard, single leg X, berimbolo, worm sweep, etc.)
+- Leg locks autorisés selon IBJJF (straight ankle, kneebar, toe hold, etc. mais pas de heel hook en Gi)
+- Stratégie de combat, gestion de l'énergie, points/avantages
+- Sparring libre compétition-style (score, chrono, reset)
+- Beaucoup plus de variantes No-Gi intégrées
 
 ---
 
@@ -388,6 +506,26 @@
 
 ---
 
+---
+
+## ⚠️ **Note Importante sur le Contenu**
+
+> **Le contenu exact, semaine par semaine, des programmes Gracie Barra (GB1, GB2, GB3) est propriétaire, réservé aux instructeurs et aux membres via la plateforme GB Online.**
+
+**Ce document présente :**
+- ✅ La structure des 16 semaines (logique et thèmes abordés)
+- ✅ Un tableau modèle utilisable pour compléter avec GB Online
+- ✅ La progression typique conforme à la logique GB
+- ✅ Les différences clés entre les programmes
+
+**Pour le contenu officiel complet :**
+- Consultez la plateforme GB Online
+- Contactez votre instructeur Gracie Barra
+- Référez-vous aux manuels techniques officiels
+
+---
+
 *Document créé pour l'application JJBapp - Module Progression et Formation*
-*Source : Système officiel Gracie Barra*
-*Programme complet des 48 semaines de formation*
+*Source : Système officiel Gracie Barra (structure et logique)*
+*Programme complet des 48 semaines de formation (version modèle)*
+*Note : Contenu exact réservé à GB Online*
