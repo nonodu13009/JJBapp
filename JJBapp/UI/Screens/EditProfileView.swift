@@ -13,6 +13,8 @@ struct EditProfileView: View {
     @State private var lastName = ""
     @State private var gender: Gender?
     @State private var birthDate = BirthDate()
+    @State private var weight: Weight?
+    @State private var competitionType: CompetitionType = .gi
     @State private var isLoading = false
     @State private var showSaveSuccess = false
     
@@ -68,6 +70,12 @@ struct EditProfileView: View {
                                 
                                 // Date de naissance
                                 BirthDateInput(birthDate: $birthDate)
+                                
+                                // Poids
+                                WeightInput(weight: $weight)
+                                
+                                // Type de compétition
+                                CompetitionTypeSelector(selectedType: $competitionType)
                             }
                             .padding(.horizontal, 40)
                             
@@ -106,6 +114,8 @@ struct EditProfileView: View {
         lastName = profile.lastName ?? ""
         gender = profile.gender
         birthDate = profile.birthDate ?? BirthDate()
+        weight = profile.weight
+        competitionType = profile.competitionType ?? .gi
     }
     
     // Sauvegarder le profil
@@ -121,6 +131,8 @@ struct EditProfileView: View {
         updatedProfile.lastName = lastName.isEmpty ? nil : lastName
         updatedProfile.gender = gender
         updatedProfile.birthDate = birthDate
+        updatedProfile.weight = weight
+        updatedProfile.competitionType = competitionType
         
         Task {
             do {

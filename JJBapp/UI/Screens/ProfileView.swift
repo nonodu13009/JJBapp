@@ -233,6 +233,35 @@ struct ProfileInfoSection: View {
                         value: "\(birthDate.displayText) (\(birthDate.age ?? 0) ans)"
                     )
                 }
+                
+                // Poids
+                if let weight = profile.weight {
+                    InfoRow(
+                        icon: "scalemass",
+                        title: "Poids",
+                        value: weight.displayText
+                    )
+                }
+            }
+            
+            // Classification IBJJF
+            if let weight = profile.weight,
+               let birthDate = profile.birthDate,
+               birthDate.isValid,
+               let age = birthDate.age {
+                
+                let classification = IBJJFCategoryManager.shared.getIBJJFClassification(
+                    age: age,
+                    weight: weight.value,
+                    isGi: profile.competitionType == .gi
+                )
+                
+                IBJJFClassificationTag(classification: classification)
+                    .environmentObject(themeManager)
+                
+                // Timeline des catégories de poids
+                WeightCategoryTimeline(currentWeight: weight.value)
+                    .environmentObject(themeManager)
             }
         }
         .padding(.horizontal, 40)

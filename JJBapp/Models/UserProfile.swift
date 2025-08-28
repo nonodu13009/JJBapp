@@ -10,6 +10,8 @@ struct UserProfile: Codable, Identifiable {
     var lastName: String?
     var gender: Gender?
     var birthDate: BirthDate?
+    var weight: Weight?
+    var competitionType: CompetitionType?
     var createdAt: Date
     var updatedAt: Date
     
@@ -82,6 +84,44 @@ struct BirthDate: Codable, Equatable {
         let today = Date()
         let birthDate = calendar.date(from: DateComponents(year: year, month: month, day: day)) ?? today
         return calendar.dateComponents([.year], from: birthDate, to: today).year
+    }
+}
+
+// MARK: - Structure pour le poids
+struct Weight: Codable, Equatable {
+    var value: Double
+    var unit: WeightUnit
+    
+    var isValid: Bool {
+        return value >= 20.0 && value <= 200.0
+    }
+    
+    var displayText: String {
+        return String(format: "%.1f kg", value)
+    }
+    
+    var displayTextShort: String {
+        return String(format: "%.0f kg", value)
+    }
+}
+
+// MARK: - Énumération pour l'unité de poids
+enum WeightUnit: String, CaseIterable, Codable {
+    case kg = "kg"
+    case lbs = "lbs"
+    
+    var displayName: String {
+        switch self {
+        case .kg: return "kilogrammes"
+        case .lbs: return "livres"
+        }
+    }
+    
+    var symbol: String {
+        switch self {
+        case .kg: return "kg"
+        case .lbs: return "lbs"
+        }
     }
 }
 
